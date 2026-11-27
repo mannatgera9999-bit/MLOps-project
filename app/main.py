@@ -38,9 +38,16 @@ FEATURES = [
 class JsonFormatter(logging.Formatter):
     def format(self, record):
         log_entry = {
+            "timestamp": self.formatTime(record),
             "level": record.levelname,
             "message": record.getMessage(),
         }
+
+        event_data = getattr(record, "event_data", None)
+
+        if isinstance(event_data, dict):
+            log_entry.update(event_data)
+
         return json.dumps(log_entry)
 
 
@@ -150,14 +157,15 @@ def predict(request: PredictionRequest):
     prediction = float(model.predict(input_data)[0])
 
     logger.info(
-        json.dumps(
-            {
+        "prediction_generated",
+        extra={
+            "event_data": {
                 "event": "prediction",
                 "prediction": prediction,
                 "shed": request.shed,
                 "fabric": request.fabric,
             }
-        )
+        }
     )
 
     return {
