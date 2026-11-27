@@ -294,7 +294,6 @@ def main():
     check_target_values(train)
     check_spelling_variants(train, later)
     check_unit_mixup_by_shed(train)
-    check_stuck_sensor_by_date(train)
     check_target_typos(train)
     investigate_unit_patterns(train, later)
     check_stuck_sensor_by_calendar_day(train)
