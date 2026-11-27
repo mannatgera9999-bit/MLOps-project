@@ -69,3 +69,37 @@ def test_thread_count_validation(client):
     response = client.post("/predict", json=payload)
 
     assert response.status_code == 422
+
+def test_missing_required_field(client):
+    payload = {
+        "loom_age_yr": 15,
+        "thread_count": 120,
+        "power_cuts_min": 30,
+        "weaver_exp_yr": 10,
+        "humidity_pct": 60,
+        "shift_hours": 8,
+        "fabric": "cotton"
+        # shed is intentionally missing
+    }
+
+    response = client.post("/predict", json=payload)
+
+    assert response.status_code == 422
+
+
+def test_unexpected_field_rejected(client):
+    payload = {
+        "loom_age_yr": 15,
+        "thread_count": 120,
+        "power_cuts_min": 30,
+        "weaver_exp_yr": 10,
+        "humidity_pct": 60,
+        "shift_hours": 8,
+        "fabric": "cotton",
+        "shed": "Shed 1",
+        "unexpected_field": "invalid"
+    }
+
+    response = client.post("/predict", json=payload)
+
+    assert response.status_code == 422
