@@ -1,0 +1,13 @@
+
+.venv/
+__pycache__/
+.pytest_cache/
+.git/
+.gitignore
+*.pyc
+*.pyo
+*.log
+mlruns/
+mlartifacts/
+data/raw/train.csv
+data/raw/later.csv

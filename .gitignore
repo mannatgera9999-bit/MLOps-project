@@ -221,3 +221,14 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# MLflow temporary experiment artifacts
+mlruns/
+mlartifacts/
+
+# Local environment variables
+.env
+
+# Temporary Python execution
+tempCodeRunnerFile.py
+data/processed/*.csv

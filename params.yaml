@@ -1,0 +1,29 @@
+
+random_state: 42
+
+data:
+  train_path: data/processed/train_clean.csv
+  later_path: data/processed/later_clean.csv
+  holdout_path: data/processed/holdout_clean.csv
+  target: metres_per_shift
+  id_column: record_id
+  date_column: date
+
+model:
+  test_size: 0.20
+  candidates:
+    - RandomForest
+    - GradientBoosting
+  random_forest:
+    n_estimators: 200
+    max_depth: 12
+    min_samples_split: 2
+  gradient_boosting:
+    n_estimators: 150
+    learning_rate: 0.05
+    max_depth: 3
+
+mlflow:
+  experiment_name: MP150_Power_Loom_Output
+  tracking_uri: sqlite:///mlflow.db
+  registered_model_name: MP150_PowerLoom_Model

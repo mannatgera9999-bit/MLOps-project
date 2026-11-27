@@ -1,0 +1,72 @@
+# MP150 findings --- fill in every value, keep every key.
+# The marking tool reads this file. Write null only where the comment says so.
+# Use the exact column names and group values from your data files.
+
+group_id: "G206"          # your group id, e.g. "G042"
+problem_id: "MP150"
+
+data_issues:
+  leaking_column:
+    present: true
+    column: "metres_checked_at_folding"
+
+  unit_mixup:
+    present: false
+    column: null
+    group_value: null
+    factor: null
+
+  sentinel_value:
+    present: true
+    column: "power_cuts_min"
+    value: -999
+    count: 35
+
+  duplicate_rows:
+    present: false
+    count: 0
+
+  stuck_sensor:
+    present: false
+    column: null
+    start_date: null
+    end_date: null
+
+  target_typos:
+    present: true
+    count: 15
+
+  spelling_variants:
+    present: true
+    column: "fabric"
+    true_levels:
+      - "silk"
+      - "polyester"
+      - "cotton"
+tracking:
+  experiment_name: "MP150_Power_Loom_Output"
+  best_run_id: "dddff0fc0c1b4ec1aba9078b093074dc"
+  registered_model_name: "MP150_PowerLoom_Model"
+  champion_version: 2
+
+monitoring:
+  psi:
+    loom_age_yr: 5.723341
+    thread_count: 0.011469
+    power_cuts_min: 0.039257
+    weaver_exp_yr: 0.020269
+    humidity_pct: 0.016924
+    shift_hours: 0.037227
+
+  most_drifted_feature: "loom_age_yr"
+
+  mae_by_group:
+    'Shed 1': 6.3059
+    'Shed 2': 10.6105
+    'Shed 3': 6.0646
+
+  worst_served_group: "Shed 2"
+
+  mae_v1_on_check: 8.2548
+  mae_v2_on_check: 4.0392
+  decision: "promote_v2"
