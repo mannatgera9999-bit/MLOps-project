@@ -1,0 +1,33 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mp150-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: mp150-api
+  template:
+    metadata:
+      labels:
+        app: mp150-api
+    spec:
+      containers:
+        - name: mp150-api
+          image: mp150-api:1.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 10
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 30
+            periodSeconds: 10
